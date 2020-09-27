@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import NProgress from "nprogress"; //nprogress module
 import "nprogress/nprogress.css"; //styles of nprogress
+import "../styles/index.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

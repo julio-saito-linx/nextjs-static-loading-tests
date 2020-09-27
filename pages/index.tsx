@@ -1,11 +1,11 @@
 import Layout from "../components/Layout";
 import { GetStaticProps } from "next";
 import React from "react";
-import Horario from "../components/Horario";
 import LoadingProp from "../interfaces/LoadingProp";
+import HeroMain from "../components/HeroMain";
 
 type Props = {
-  horaDoServidor: string;
+  timeOnServer: string;
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
@@ -14,34 +14,25 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     console.log("IndexPage: getStaticProps: START");
     setTimeout(() => {
       resolve(true);
-    }, 2000);
+    }, 1000);
   });
   const novoHorario = new Date().toISOString();
   console.log("IndexPage: getStaticProps: " + novoHorario);
 
   return {
     props: {
-      horaDoServidor: novoHorario,
+      timeOnServer: novoHorario,
     },
   };
 };
 
-const IndexPage = ({ horaDoServidor, loading }: Props & LoadingProp) => (
+const IndexPage = ({ timeOnServer, loading }: Props & LoadingProp) => (
   <Layout title="Index: getStaticPropsPage" loading={loading}>
-    <h1>Index: getStaticPropsPage</h1>
-    <p>Hora do Servidor:</p>
-    <Horario>{horaDoServidor}</Horario>
-    <hr />
-    <button
-      type="button"
-      onClick={() => {
-        document.location.reload();
-      }}
-    >
-      Recarregar
-    </button>
-
-    <p>Tudo estático aqui, só pega a informação em tempo de build</p>
+    <HeroMain
+      title="Home: static"
+      description="The date is fixed, created on server at build time."
+      timeOnServer={timeOnServer}
+    />
   </Layout>
 );
 

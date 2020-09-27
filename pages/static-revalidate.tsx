@@ -1,11 +1,11 @@
 import Layout from "../components/Layout";
 import { GetStaticProps } from "next";
 import React from "react";
-import Horario from "../components/Horario";
 import LoadingProp from "../interfaces/LoadingProp";
+import HeroMain from "../components/HeroMain";
 
 type Props = {
-  horaDoServidor: string;
+  timeOnServer: string;
 };
 
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
@@ -14,13 +14,13 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     console.log("ACadaCincoSegundosPage: getStaticProps: START");
     setTimeout(() => {
       resolve(true);
-    }, 2000);
+    }, 1000);
   });
   const novoHorario = new Date().toISOString();
   console.log("ACadaCincoSegundosPage: getStaticProps: " + novoHorario);
   return {
     props: {
-      horaDoServidor: novoHorario,
+      timeOnServer: novoHorario,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
@@ -30,23 +30,15 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
 };
 
 const ACadaCincoSegundosPage = ({
-  horaDoServidor,
+  timeOnServer,
   loading,
 }: Props & LoadingProp) => (
   <Layout title="ACadaCincoSegundosPage" loading={loading}>
-    <h1>ACadaCincoSegundosPage</h1>
-    <p>Hora do Servidor:</p>
-    <Horario>{horaDoServidor}</Horario>
-    <hr />
-    <button
-      type="button"
-      onClick={() => {
-        document.location.reload();
-      }}
-    >
-      Recarregar
-    </button>
-    <p>Aqui é sempre instantâneo, ele pega so servidor em background</p>
+    <HeroMain
+      title="Static: with revalidate"
+      description="No loading time, but refresh when requested after 5 seconds passed"
+      timeOnServer={timeOnServer}
+    />
   </Layout>
 );
 
