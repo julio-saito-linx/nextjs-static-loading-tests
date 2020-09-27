@@ -10,23 +10,27 @@ type Props = {
 export const getStaticProps: GetStaticProps<Props> = async (context) => {
   await new Promise((resolve) => {
     console.log("");
-    console.log("IndexPage: getStaticProps: START");
+    console.log("ACadaCincoSegundosPage: getStaticProps: START");
     setTimeout(() => {
       resolve(true);
     }, 2000);
   });
   const novoHorario = new Date().toISOString();
-  console.log("IndexPage: getStaticProps: " + novoHorario);
+  console.log("ACadaCincoSegundosPage: getStaticProps: " + novoHorario);
   return {
     props: {
       horaDoServidor: novoHorario,
     },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every second
+    revalidate: 5, // In seconds,
   };
 };
 
-const IndexPage = ({ horaDoServidor }: Props) => (
-  <Layout title="Index: getStaticPropsPage">
-    <h1>Index: getStaticPropsPage</h1>
+const ACadaCincoSegundosPage = ({ horaDoServidor }: Props) => (
+  <Layout title="ACadaCincoSegundosPage">
+    <h1>ACadaCincoSegundosPage</h1>
     <p>Hora do Servidor:</p>
     <Horario>{horaDoServidor}</Horario>
     <hr />
@@ -38,9 +42,8 @@ const IndexPage = ({ horaDoServidor }: Props) => (
     >
       Recarregar
     </button>
-
-    <p>Tudo estático aqui, só pega a informação em tempo de build</p>
+    <p>Aqui é sempre instantâneo, ele pega so servidor em background</p>
   </Layout>
 );
 
-export default IndexPage;
+export default ACadaCincoSegundosPage;

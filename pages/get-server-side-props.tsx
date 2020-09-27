@@ -7,16 +7,16 @@ type Props = {
   horaDoServidor: string;
 };
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getServerSideProps: GetStaticProps<Props> = async (context) => {
   await new Promise((resolve) => {
     console.log("");
-    console.log("IndexPage: getStaticProps: START");
+    console.log("GetServerSiteCodePage: getServerSideProps: START");
     setTimeout(() => {
       resolve(true);
     }, 2000);
   });
   const novoHorario = new Date().toISOString();
-  console.log("IndexPage: getStaticProps: " + novoHorario);
+  console.log("GetServerSiteCodePage: getServerSideProps: " + novoHorario);
   return {
     props: {
       horaDoServidor: novoHorario,
@@ -24,9 +24,9 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   };
 };
 
-const IndexPage = ({ horaDoServidor }: Props) => (
-  <Layout title="Index: getStaticPropsPage">
-    <h1>Index: getStaticPropsPage</h1>
+const GetServerSiteCodePage = ({ horaDoServidor }: Props) => (
+  <Layout title="getServerSideProps">
+    <h1>getServerSideProps</h1>
     <p>Hora do Servidor:</p>
     <Horario>{horaDoServidor}</Horario>
     <hr />
@@ -38,9 +38,8 @@ const IndexPage = ({ horaDoServidor }: Props) => (
     >
       Recarregar
     </button>
-
-    <p>Tudo estático aqui, só pega a informação em tempo de build</p>
+    <p>Observe que demora pq está esperando o servidor</p>
   </Layout>
 );
 
-export default IndexPage;
+export default GetServerSiteCodePage;
