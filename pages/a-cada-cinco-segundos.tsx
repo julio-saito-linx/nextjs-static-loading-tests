@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { GetStaticProps } from "next";
 import React from "react";
 import Horario from "../components/Horario";
+import LoadingProp from "../interfaces/LoadingProp";
 
 type Props = {
   horaDoServidor: string;
@@ -28,8 +29,11 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   };
 };
 
-const ACadaCincoSegundosPage = ({ horaDoServidor }: Props) => (
-  <Layout title="ACadaCincoSegundosPage">
+const ACadaCincoSegundosPage = ({
+  horaDoServidor,
+  loading,
+}: Props & LoadingProp) => (
+  <Layout title="ACadaCincoSegundosPage" loading={loading}>
     <h1>ACadaCincoSegundosPage</h1>
     <p>Hora do Servidor:</p>
     <Horario>{horaDoServidor}</Horario>

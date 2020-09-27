@@ -5,11 +5,12 @@ import Head from "next/head";
 type Props = {
   children?: ReactNode;
   title?: string;
+  loading?: boolean;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => {
+const Layout = ({ children, title = "exemplo", loading }: Props) => {
   return (
-    <div>
+    <div style={loading ? { pointerEvents: "none", opacity: "0.4" } : {}}>
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
@@ -38,7 +39,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => {
       {children}
       <footer>
         <hr />
-        <span>I'm here to stay (Footer)</span>
+        <span>(footer)</span>
       </footer>
     </div>
   );

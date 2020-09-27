@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { GetStaticProps } from "next";
 import React from "react";
 import Horario from "../components/Horario";
+import LoadingProp from "../interfaces/LoadingProp";
 
 type Props = {
   horaDoServidor: string;
@@ -24,8 +25,11 @@ export const getServerSideProps: GetStaticProps<Props> = async (context) => {
   };
 };
 
-const GetServerSiteCodePage = ({ horaDoServidor }: Props) => (
-  <Layout title="getServerSideProps">
+const GetServerSiteCodePage = ({
+  horaDoServidor,
+  loading,
+}: Props & LoadingProp) => (
+  <Layout title="getServerSideProps" loading={loading}>
     <h1>getServerSideProps</h1>
     <p>Hora do Servidor:</p>
     <Horario>{horaDoServidor}</Horario>
